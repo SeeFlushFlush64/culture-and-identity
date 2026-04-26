@@ -271,7 +271,9 @@ const artist = artistsData[slug as keyof typeof artistsData];
 </script>
 
 <style>
-  .artist-page { padding-top: 80px; }
+ .artist-page {
+  padding-top: 80px;
+}
 
   .artist-hero {
     display: grid;
@@ -442,7 +444,7 @@ const artist = artistsData[slug as keyof typeof artistsData];
   }
   .work-card:hover .work-cta { opacity: 1; }
 
-  .artist-nav { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid rgba(28,25,23,0.1); }
+  .artist-nav { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid rgba(28,25,23,0.1); background-color: #f2ead8; /* ADD */}
   .artist-nav-item {
     display: flex; align-items: center; gap: 1.5rem; padding: 2.5rem 4rem;
     text-decoration: none; color: #1c1917; transition: background 0.3s ease;
@@ -481,8 +483,5 @@ const artist = artistsData[slug as keyof typeof artistsData];
     .nav-next { border-left: none; border-top: 1px solid rgba(28,25,23,0.1); justify-content: flex-start; }
     .artist-nav-item { padding: 2rem; }
   }
-  .artist-page {
 
-  background-color: #f2ead8; /* ADD THIS */
-}
 </style>

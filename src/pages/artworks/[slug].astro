@@ -252,7 +252,9 @@ const artwork = artworksData[slug as keyof typeof artworksData];
 </script>
 
 <style>
-  .artwork-page { padding-top: 72px; }
+.artwork-page {
+  padding-top: 80px;
+}
 
   /* ── HERO ── */
   .artwork-hero {
@@ -379,7 +381,8 @@ const artwork = artworksData[slug as keyof typeof artworksData];
   /* ── PREV / NEXT ── */
   .artwork-nav {
     display: grid; grid-template-columns: 1fr 1fr;
-    border-top: 1px solid rgba(28,25,23,0.1);
+    border-top: 1px solid rgba(28,25,23,0.1
+    );
   }
   .artwork-nav-item {
     display: flex; align-items: center; gap: 1.5rem;
@@ -444,8 +447,5 @@ const artwork = artworksData[slug as keyof typeof artworksData];
     }
     .artwork-nav-item { padding: 1.5rem; }
   }
-  .artwork-page {
-
-  background-color: #f2ead8; /* ADD THIS */
-}
+  
 </style>
