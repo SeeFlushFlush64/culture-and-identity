@@ -376,4 +376,12 @@ const artworks = [
     from { opacity:0; transform:translateY(20px); }
     to   { opacity:1; transform:translateY(0); }
   }
+  @media (max-width: 640px) {
+  .grid-3, .grid-2 {
+    grid-template-columns: 1fr;
+  }
+  .grid-3 .artwork-card { aspect-ratio: 4/3; }
+  .grid-2 .artwork-card { aspect-ratio: 4/3; }
+  .collection-section { padding: 3rem 1.25rem; }
+}
 </style>
