@@ -32,6 +32,7 @@ const artistsData = {
     ],
     prev: null,
     next: { slug: 'juan-luna', name: 'Juan Luna', image: '/artists/juan-luna.jpg' },
+    imagePosition: 'center 25%'
   },
   'juan-luna': {
     name: 'Juan Luna',
@@ -75,6 +76,7 @@ const artistsData = {
     ],
     prev: { slug: 'juan-luna', name: 'Juan Luna', image: '/artists/juan-luna.jpg' },
     next: { slug: 'elmer-borlongan', name: 'Elmer Borlongan', image: '/artists/elmer-borlongan.jpg' },
+    imagePosition: 'center 30%'
   },
   'elmer-borlongan': {
     name: 'Elmer Borlongan',
@@ -96,6 +98,7 @@ const artistsData = {
     ],
     prev: { slug: 'guillermo-tolentino', name: 'Guillermo Tolentino', image: '/artists/guillermo-tolentino.jpeg' },
     next: { slug: 'juanito-torres', name: 'Juanito Torres', image: '/artists/juanito-torres.jpg' },
+    imagePosition: 'center 35%'
   },
   'juanito-torres': {
     name: 'Juanito Torres',
@@ -130,7 +133,12 @@ const artist = artistsData[slug as keyof typeof artistsData];
     <section class="artist-hero">
       <div class="hero-image-col">
         <div class="hero-img-wrap">
-          <img src={artist.image} alt={artist.name} class="hero-img" />
+          <img 
+  src={artist.image} 
+  alt={artist.name} 
+  class="hero-img"
+  style={(artist as any).imagePosition ? `object-position: ${(artist as any).imagePosition}` : ''}
+/>
           <div class="img-overlay"></div>
         </div>
         <div class="lifespan-badge"><span>{artist.lifespan}</span></div>
