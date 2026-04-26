@@ -24,6 +24,7 @@
 html { scroll-behavior:smooth; }
 
 body {
+  background-color: #f2ead8; /* ADD THIS LINE FIRST */
   background-color: var(--bg);
   color: var(--ink);
   font-family: var(--font-body);
@@ -101,10 +102,10 @@ nav a:hover { opacity: 1 !important; }
    ════════════════════════════════════════ */
 @media (max-width: 768px) {
 
-  /* Nav */
+  /* Nav
   nav {
     padding: 0 1.25rem !important;
-  }
+  } */
 
   /* Make eyebrows/labels slightly bigger on mobile so they're legible */
   .eyebrow, .label-sm,
