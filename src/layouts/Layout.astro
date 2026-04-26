@@ -1,0 +1,121 @@
+---
+export interface Props {
+  title: string;
+}
+const { title } = Astro.props;
+const pathname = Astro.url.pathname;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/src/styles/global.css" />
+  </head>
+  <body>
+
+    <!-- NAV -->
+    <nav>
+      <a href="/" class="nav-logo">Culture &amp; Identity</a>
+      <div class="nav-links">
+        <a href="/"         class={pathname === '/'           ? 'active' : ''}>Home</a>
+        <a href="/artworks" class={pathname.startsWith('/artworks') ? 'active' : ''}>Artworks</a>
+        <a href="/artists"  class={pathname.startsWith('/artists')  ? 'active' : ''}>Artists</a>
+        <a href="/about"    class={pathname === '/about'       ? 'active' : ''}>About</a>
+      </div>
+    </nav>
+
+    <slot />
+
+    <footer>
+      <p class="footer-logo">Culture &amp; Identity</p>
+      <p class="footer-sub">A Virtual Museum Tour</p>
+    </footer>
+
+    <!-- Scroll Reveal Script -->
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+        { threshold: 0.12 }
+      );
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+
+  </body>
+</html>
+
+<style>
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 3rem;
+    background: rgba(242,234,216,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(28,25,23,0.08);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1c1917;
+    text-decoration: none;
+    letter-spacing: 0.05em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  .nav-links a {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #1c1917;
+    text-decoration: none;
+    opacity: 0.55;
+    transition: opacity 0.2s ease;
+  }
+
+  .nav-links a:hover,
+  .nav-links a.active {
+    opacity: 1;
+  }
+
+  .nav-links a.active {
+    border-bottom: 1px solid #8b1a1a;
+    padding-bottom: 2px;
+  }
+
+  footer {
+    background: #1c1917;
+    color: #f7f4ef;
+    padding: 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 400;
+    opacity: 0.7;
+  }
+
+  .footer-sub {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    opacity: 0.4;
+    letter-spacing: 0.1em;
+  }
+</style>

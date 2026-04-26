@@ -1,0 +1,447 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+export function getStaticPaths() {
+  return [
+    'battle-of-mactan', 'general-malvar', 'achilles-patroclus',
+    'spoliarium', 'diwata', 'retablo', 'rizal-bust',
+  ].map((slug) => ({ params: { slug } }));
+}
+
+const artworksData = {
+  'battle-of-mactan': {
+    title: 'Battle of Mactan',
+    artist: 'Elmer Borlongan',
+    artistSlug: 'elmer-borlongan',
+    year: '2004',
+    medium: 'Oil on canvas',
+    dimensions: '183 × 244 cm',
+    location: 'Private Collection, Philippines',
+    image: '/artworks/battle-of-mactan.jpg',
+    pullQuote: '"A people who do not know their past have no future."',
+    description: [
+      "Elmer Borlongan's Battle of Mactan reimagines the legendary confrontation of April 27, 1521 — the day Lapulapu and his Mactan warriors repelled the forces of Ferdinand Magellan — through the lens of contemporary Filipino expressionism.",
+      "Where colonial-era depictions often glorified the European expedition, Borlongan returns agency to the indigenous fighters. His figures are monumental, their bodies rendered with urgency and raw physicality. The canvas pulses with the chaos of battle, yet Lapulapu stands unmistakably resolute at its center.",
+      "Borlongan is known for his social realist tendencies, and in this work he brings that same moral clarity to history. This is not a neutral retelling — it is a reclamation. The battle, long commemorated in Philippine history, is here transfigured into an image of defiant sovereignty that resonates far beyond its 16th-century setting.",
+    ],
+    significance: "The Battle of Mactan is the founding myth of Filipino resistance. By depicting it in oil paint in the 21st century, Borlongan insists that this history is not merely past — it is present. In an era of renewed questions about sovereignty and national pride, the painting asks: who gets to tell the story of a people, and in whose image is a nation formed?",
+    prev: null,
+    next: { slug: 'general-malvar', title: 'General Malvar', image: '/artworks/general-malvar.jpg' },
+  },
+  'general-malvar': {
+    title: 'General Malvar: Lider ng Masang Pilipino',
+    artist: 'Juanito Torres',
+    artistSlug: 'juanito-torres',
+    year: '2002',
+    medium: 'Oil on canvas',
+    dimensions: 'Variable',
+    location: 'Philippines',
+    image: '/artworks/general-malvar.jpg',
+    pullQuote: '"He fought not for glory — but for the people who had none."',
+    description: [
+      "Juanito Torres's portrait of General Miguel Malvar presents one of the Philippine-American War's last and most tenacious resistance leaders not as a solitary hero, but as a figure embedded in the masses he led.",
+      "Torres's approach refuses the conventions of the heroic portrait. Malvar is surrounded by the people — farmers, workers, ordinary Filipinos who formed the backbone of the resistance. The composition argues that his significance derives from their support, not from any individual brilliance.",
+      "This collective framing is Torres's signature. For him, heroism is never singular; it is always social, always rooted in community. The painting recovers a figure often overshadowed by Rizal and Bonifacio in the official nationalist canon.",
+    ],
+    significance: "General Malvar represents a gap in official Philippine historical memory. Torres's painting is an act of recovery — insisting that the nation's story is bigger than its most celebrated names, and that those who continued the struggle after others had surrendered deserve to be seen.",
+    prev: { slug: 'battle-of-mactan', title: 'Battle of Mactan', image: '/artworks/battle-of-mactan.jpg' },
+    next: { slug: 'achilles-patroclus', title: 'Achilles Lamenting', image: '/artworks/achilles-patroclus.jpg' },
+  },
+  'achilles-patroclus': {
+    title: 'Achilles Lamenting the Death of Patroclus',
+    artist: 'Gavin Hamilton',
+    artistSlug: 'gavin-hamilton',
+    year: '1763',
+    medium: 'Oil on canvas',
+    dimensions: '391 × 391 cm',
+    location: 'National Gallery of Scotland, Edinburgh',
+    image: '/artworks/achilles-patroclus.jpg',
+    pullQuote: '"Grief, when rendered with sufficient grandeur, becomes a form of heroism."',
+    description: [
+      "Gavin Hamilton's monumental canvas depicts the moment from Homer's Iliad when Achilles discovers the death of his companion Patroclus. The scene is rendered with the moral seriousness that would define Neoclassicism: grief elevated into something universal, tragic, and instructive.",
+      "Hamilton was one of the first painters to apply the Neoclassical program to Homer — using ancient narratives not as decoration but as vehicles for moral argument. His Achilles is not diminished by grief but enlarged by it; his suffering is the measure of his love.",
+      "The work influenced an entire generation of painters who passed through Rome, including Jacques-Louis David, who would go on to shape the visual culture of the French Revolution and Napoleonic era.",
+    ],
+    significance: "Hamilton's Achilles entered Philippine classrooms through the colonial curriculum — a Greek story filtered through a Scottish painter, taught to Filipino students as universal literature. In absorbing this work, Filipino artistic consciousness did something remarkable: it took a foreign tradition and made it speak to its own conditions of suffering, resistance, and the cost of war.",
+    prev: { slug: 'general-malvar', title: 'General Malvar', image: '/artworks/general-malvar.jpg' },
+    next: { slug: 'spoliarium', title: 'Spoliarium', image: '/artworks/spoliarium.jpg' },
+  },
+  'spoliarium': {
+    title: 'Spoliarium',
+    artist: 'Juan Luna',
+    artistSlug: 'juan-luna',
+    year: '1884',
+    medium: 'Oil on canvas',
+    dimensions: '423 × 776 cm',
+    location: 'National Museum of Fine Arts, Manila',
+    image: '/artworks/spoliarium.jpg',
+    pullQuote: '"A poem of condemnation and grief." — José Rizal',
+    description: [
+      "Juan Luna's Spoliarium depicts the aftermath of gladiatorial combat in ancient Rome — but no one who saw it in Madrid in 1884 missed its real subject. The bodies being dragged from the arena, stripped of dignity and life, were a barely veiled indictment of Spanish colonial rule in the Philippines.",
+      "The painting won the gold medal at the Exposición Nacional de Bellas Artes — the first time a Filipino artist had achieved such recognition at a major European competition. Its scale alone was an act of ambition: nearly eight meters wide, impossible to ignore.",
+      "José Rizal, present in Madrid during the exhibition, understood immediately what Luna had accomplished. In his famous toast, he called the work a poem rendered in paint — an instrument of political awakening disguised as academic painting.",
+    ],
+    significance: "The Spoliarium is the closest thing Filipino art has to a founding document. It proved that Filipino artists could operate at the highest levels of European academic tradition — and use that tradition as a weapon against the colonial power that had long treated Filipino culture as inferior.",
+    prev: { slug: 'achilles-patroclus', title: 'Achilles Lamenting', image: '/artworks/achilles-patroclus.jpg' },
+    next: { slug: 'diwata', title: 'Diwata', image: '/artworks/diwata.jpg' },
+  },
+  'diwata': {
+    title: 'Diwata',
+    artist: 'Guillermo Tolentino',
+    artistSlug: 'guillermo-tolentino',
+    year: '1931',
+    medium: 'Marble',
+    dimensions: 'Life-size',
+    location: 'University of the Philippines, Diliman',
+    image: '/artworks/diwata.jpg',
+    pullQuote: '"To give a goddess a Filipino face is to insist that the divine speaks our language."',
+    description: [
+      "Guillermo Tolentino's Diwata renders a pre-colonial Filipino spirit goddess in the classical European sculptural tradition — smooth marble, idealized form, the technical vocabulary of Rome and the Renaissance. The result is a synthesis that should feel contradictory but instead feels inevitable.",
+      "The diwata occupies a complex position in Philippine mythology: a nature spirit, a guardian, a being of power who inhabits sacred spaces. By giving her the form of classical sculpture, Tolentino argues that she belongs in the same conversation as Venus, Diana, and the goddesses of the Western tradition.",
+      "Tolentino studied at the Royal Academy of Fine Arts in Rome, and his mastery of the European idiom is complete. But the subject — the choice to render a Filipino spiritual figure in this language — is a declaration: our traditions are as worthy of monumental treatment as any in the world.",
+    ],
+    significance: "The Diwata represents one strategy for navigating the colonial encounter: not resistance, but appropriation. By using the colonizer's aesthetic language to glorify indigenous spiritual figures, Tolentino performs a kind of cultural judo — turning European technique toward the recovery of Filipino identity.",
+    prev: { slug: 'spoliarium', title: 'Spoliarium', image: '/artworks/spoliarium.jpg' },
+    next: { slug: 'retablo', title: 'Retablo', image: '/artworks/retablo.jpg' },
+  },
+  'retablo': {
+    title: 'Retablo',
+    artist: 'Unknown',
+    artistSlug: null,
+    year: 'c. 18th Century',
+    medium: 'Gilded wood, mixed media',
+    dimensions: 'Variable',
+    location: 'San Agustin Church, Manila',
+    image: '/artworks/retablo.jpg',
+    pullQuote: '"The Church built the Filipino soul — and the Filipino soul rebuilt the Church."',
+    description: [
+      "The retablo — an ornate altarpiece — was one of the primary vehicles through which the Catholic Church shaped Filipino religious and cultural identity during three centuries of Spanish colonialism. This example, from the 18th century, exemplifies the Filipino-Spanish Baroque style that emerged from that encounter.",
+      "What makes Philippine retablos distinctive is the degree to which indigenous craftsmanship transformed the imported form. Filipino artisans brought their own aesthetic sensibilities to the European model — integrating local motifs, materials, and compositional approaches that gradually created something new.",
+      "The result is neither purely Spanish nor purely indigenous, but something that could only have emerged from the specific conditions of colonial Philippines: a hybrid form that encodes centuries of negotiation, adaptation, and survival.",
+    ],
+    significance: "The retablo raises uncomfortable questions about cultural identity under colonialism. Is it an instrument of oppression — a tool for replacing indigenous beliefs with a foreign religion? Or is it evidence of Filipino creativity and resilience — a tradition transformed from within? The answer, the exhibition argues, is both.",
+    prev: { slug: 'diwata', title: 'Diwata', image: '/artworks/diwata.jpg' },
+    next: { slug: 'rizal-bust', title: 'José Rizal Bust', image: '/artworks/rizal-bust.jpg' },
+  },
+  'rizal-bust': {
+    title: 'José Rizal Bust',
+    artist: 'Guillermo Tolentino',
+    artistSlug: 'guillermo-tolentino',
+    year: '1911',
+    medium: 'Bronze',
+    dimensions: 'Life-size',
+    location: 'Various public locations, Philippines',
+    image: '/artworks/rizal-bust.jpg',
+    pullQuote: '"To sculpt Rizal is to sculpt the conscience of a nation."',
+    description: [
+      "Guillermo Tolentino's bust of José Rizal became, over the course of the 20th century, the definitive visual representation of the Philippine national hero. Reproduced thousands of times and installed in schools, parks, and public buildings across the archipelago, it shaped how generations of Filipinos visualize the man who became the symbol of their nation.",
+      "The portrait captures what Rizal's contemporaries described: the intellectual intensity, the quiet determination, the quality of attention that made him formidable as a novelist, physician, and political thinker. Tolentino renders him not as a martyr or a saint, but as a man — which may be why the image endures.",
+      "The ubiquity of Tolentino's Rizal is itself a historical fact worth examining. When a single artist's interpretation of a national hero becomes the definitive image, reproduced without attribution until it seems to simply be what the hero looked like, something interesting has happened to both the artist and the subject.",
+    ],
+    significance: "The Rizal Bust asks us to consider how national identity is constructed through images. Tolentino did not simply document Rizal — he created him, in the sense that the Rizal most Filipinos carry in their minds is Tolentino's Rizal. The line between portraiture and myth-making is one this work deliberately blurs.",
+    prev: { slug: 'retablo', title: 'Retablo', image: '/artworks/retablo.jpg' },
+    next: null,
+  },
+};
+
+const { slug } = Astro.params;
+const artwork = artworksData[slug as keyof typeof artworksData];
+---
+
+<Layout title={`${artwork.title} | Culture & Identity`}>
+  <main class="artwork-page">
+
+    <!-- ── HERO ── -->
+    <section class="artwork-hero">
+      <div class="hero-img-wrap">
+        <img src={artwork.image} alt={artwork.title} class="hero-img" />
+        <div class="hero-overlay"></div>
+      </div>
+      <div class="hero-text">
+        <a href="/artworks" class="hero-back">← The Collection</a>
+        <p class="hero-artist">{artwork.artist}</p>
+        <h1 class="hero-title">{artwork.title}</h1>
+        <p class="hero-year">{artwork.year}</p>
+      </div>
+    </section>
+
+    <!-- ── PULL QUOTE ── -->
+    <div class="pull-quote-wrap reveal">
+      <blockquote class="pull-quote">
+        <p>{artwork.pullQuote}</p>
+      </blockquote>
+    </div>
+
+    <!-- ── BODY: description + sidebar ── -->
+    <div class="artwork-body">
+      <div class="artwork-description">
+        {artwork.description.map((para) => (
+          <p class="desc-para reveal">{para}</p>
+        ))}
+      </div>
+
+      <aside class="artwork-meta-sidebar">
+        <p class="sidebar-heading">About this work</p>
+        <dl class="meta-list">
+          <div class="meta-item">
+            <dt>Artist</dt>
+            <dd>
+              {artwork.artistSlug
+                ? <a href={`/artists/${artwork.artistSlug}`} class="meta-link">{artwork.artist}</a>
+                : artwork.artist}
+            </dd>
+          </div>
+          <div class="meta-item"><dt>Year</dt><dd>{artwork.year}</dd></div>
+          <div class="meta-item"><dt>Medium</dt><dd>{artwork.medium}</dd></div>
+          <div class="meta-item"><dt>Dimensions</dt><dd>{artwork.dimensions}</dd></div>
+          <div class="meta-item"><dt>Location</dt><dd>{artwork.location}</dd></div>
+        </dl>
+      </aside>
+    </div>
+
+    <!-- ── SIGNIFICANCE BLOCK ── -->
+    <section class="significance-block reveal">
+      <p class="sig-label">What this means for Filipino identity</p>
+      <p class="sig-text">{artwork.significance}</p>
+    </section>
+
+    <!-- ── PREV / NEXT ── -->
+    <nav class="artwork-nav">
+      {artwork.prev ? (
+        <a href={`/artworks/${artwork.prev.slug}`} class="artwork-nav-item">
+          <div class="nav-thumb-wrap">
+            <img src={artwork.prev.image} alt={artwork.prev.title} class="nav-thumb" />
+          </div>
+          <div class="nav-info">
+            <span class="nav-direction">← Previous</span>
+            <span class="nav-name">{artwork.prev.title}</span>
+          </div>
+        </a>
+      ) : <div />}
+
+      {artwork.next ? (
+        <a href={`/artworks/${artwork.next.slug}`} class="artwork-nav-item nav-next">
+          <div class="nav-info nav-info-right">
+            <span class="nav-direction">Next →</span>
+            <span class="nav-name">{artwork.next.title}</span>
+          </div>
+          <div class="nav-thumb-wrap">
+            <img src={artwork.next.image} alt={artwork.next.title} class="nav-thumb" />
+          </div>
+        </a>
+      ) : <div />}
+    </nav>
+
+  </main>
+</Layout>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
+  revealEls.forEach((el) => observer.observe(el));
+</script>
+
+<style>
+  .artwork-page { padding-top: 72px; }
+
+  /* ── HERO ── */
+  .artwork-hero {
+    position: relative; overflow: hidden;
+    height: 85vh; min-height: 480px;
+    display: flex; align-items: flex-end;
+  }
+  .hero-img-wrap { position: absolute; inset: 0; }
+  .hero-img {
+  width: 100%; height: 100%; object-fit: cover;
+  object-position: center center;   /* ← was center top */
+  animation: kenBurns 20s ease-out forwards;  /* ← was 14s, slower = less crop */
+}
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(28,25,23,0.92) 0%,
+      rgba(28,25,23,0.4) 45%,
+      rgba(28,25,23,0.1) 100%
+    );
+  }
+  .hero-text {
+    position: relative; z-index: 2;
+    padding: 3rem 4rem;
+    width: 100%;
+    display: flex; flex-direction: column; align-items: flex-start;
+  }
+  .hero-back {
+    font-family: 'Inter', sans-serif; font-size: 0.6rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    text-decoration: none; color: #f2ead8; opacity: 0.6;
+    margin-bottom: 1.5rem; transition: opacity 0.2s;
+  }
+  .hero-back:hover { opacity: 1; }
+  .hero-artist {
+    font-family: 'Inter', sans-serif; font-size: 0.65rem;
+    letter-spacing: 0.3em; text-transform: uppercase;
+    color: #f2ead8; opacity: 0.6; margin-bottom: 0.6rem;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 3.5rem);
+    font-weight: 600; font-style: italic;
+    color: #f2ead8; line-height: 1.1;
+    max-width: 700px; margin-bottom: 0.75rem;
+  }
+  .hero-year {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem; color: #f2ead8; opacity: 0.5;
+  }
+
+  /* ── PULL QUOTE ── */
+  .pull-quote-wrap {
+    max-width: 760px; margin: 4rem auto; padding: 0 3rem;
+  }
+  .pull-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    font-weight: 400; font-style: italic; line-height: 1.65;
+    color: #1c1917;
+    border-left: 3px solid #8b1a1a;
+    padding: 0.5rem 0 0.5rem 2rem; margin: 0;
+  }
+
+  /* ── BODY ── */
+  .artwork-body {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 5rem;
+    max-width: 1100px; margin: 0 auto;
+    padding: 0 3rem 5rem;
+  }
+  .desc-para {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem; line-height: 1.95;
+    font-weight: 300; color: #1c1917; opacity: 0.82;
+    margin-bottom: 1.75rem;
+  }
+
+  /* sidebar */
+  .artwork-meta-sidebar { padding-top: 0.25rem; }
+  .sidebar-heading {
+    font-family: 'Inter', sans-serif; font-size: 0.6rem;
+    letter-spacing: 0.3em; text-transform: uppercase;
+    color: #1c1917; opacity: 0.45;
+    margin-bottom: 1.5rem; display: block;
+  }
+  .meta-list { list-style: none; }
+  .meta-item { margin-bottom: 1.25rem; }
+  .meta-item dt {
+    font-family: 'Inter', sans-serif; font-size: 0.58rem;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: #1c1917; opacity: 0.4; margin-bottom: 0.2rem;
+  }
+  .meta-item dd {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem; color: #1c1917; opacity: 0.8;
+    font-weight: 300; margin: 0;
+  }
+  .meta-link {
+    color: #8b1a1a; text-decoration: none;
+    border-bottom: 1px solid rgba(139,26,26,0.3);
+    transition: border-color 0.2s;
+  }
+  .meta-link:hover { border-color: #8b1a1a; }
+
+  /* ── SIGNIFICANCE ── */
+  .significance-block {
+    background: #1c1917; padding: 4.5rem 3rem;
+  }
+  .sig-label {
+    font-family: 'Inter', sans-serif; font-size: 0.6rem;
+    letter-spacing: 0.35em; text-transform: uppercase;
+    color: #f2ead8; opacity: 0.45;
+    max-width: 760px; margin: 0 auto 1.5rem; display: block;
+  }
+  .sig-text {
+    font-family: 'Cormorant Garamond', serif; font-size: 1.15rem;
+    line-height: 1.9; color: #f2ead8; opacity: 0.85;
+    font-weight: 300; max-width: 760px; margin: 0 auto;
+  }
+
+  /* ── PREV / NEXT ── */
+  .artwork-nav {
+    display: grid; grid-template-columns: 1fr 1fr;
+    border-top: 1px solid rgba(28,25,23,0.1);
+  }
+  .artwork-nav-item {
+    display: flex; align-items: center; gap: 1.5rem;
+    padding: 2rem 3rem; text-decoration: none; color: #1c1917;
+    transition: background 0.3s;
+  }
+  .artwork-nav-item:hover { background: rgba(28,25,23,0.04); }
+  .nav-next { border-left: 1px solid rgba(28,25,23,0.1); justify-content: flex-end; }
+  .nav-thumb-wrap {
+    width: 56px; height: 56px; overflow: hidden;
+    flex-shrink: 0; background: #ddd4c0; border-radius: 4px;
+  }
+  .nav-thumb {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.4s;
+  }
+  .artwork-nav-item:hover .nav-thumb { transform: scale(1.08); }
+  .nav-info { display: flex; flex-direction: column; gap: 0.3rem; }
+  .nav-info-right { text-align: right; }
+  .nav-direction {
+    font-family: 'Inter', sans-serif; font-size: 0.58rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: #1c1917; opacity: 0.4;
+  }
+  .nav-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem; font-weight: 500; color: #1c1917;
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    .artwork-page { padding-top: 56px; }
+
+    .artwork-hero { height: 70vw; min-height: 320px; }
+    .hero-text { padding: 2rem 1.5rem; }
+    .hero-title { font-size: clamp(1.5rem, 7vw, 2.2rem); }
+
+    .pull-quote-wrap { padding: 0 1.5rem; margin: 3rem auto; }
+    .pull-quote { font-size: 1.05rem; padding-left: 1.25rem; }
+
+    /* Stack description + sidebar vertically */
+    .artwork-body {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      padding: 0 1.5rem 4rem;
+    }
+    /* Move sidebar above description on mobile */
+    .artwork-meta-sidebar { order: -1; }
+    .meta-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem 1.5rem;
+    }
+
+    .significance-block { padding: 3rem 1.5rem; }
+
+    .artwork-nav { grid-template-columns: 1fr; }
+    .nav-next {
+      border-left: none;
+      border-top: 1px solid rgba(28,25,23,0.1);
+      justify-content: flex-start;
+    }
+    .artwork-nav-item { padding: 1.5rem; }
+  }
+</style>

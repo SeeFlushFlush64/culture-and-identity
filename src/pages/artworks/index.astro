@@ -1,0 +1,273 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const artworks = [
+  {
+    slug: 'battle-of-mactan',
+    title: 'Battle of Mactan',
+    artist: 'Elmer Borlongan',
+    year: '2004',
+    image: '/artworks/battle-of-mactan.jpg',
+    blurb: 'A visceral retelling of the 1521 clash between Lapulapu\'s warriors and Magellan\'s forces — rendered in Borlongan\'s distinctively raw, expressionist style.',
+  },
+  {
+    slug: 'general-malvar',
+    title: 'General Malvar: Lider ng Masang Pilipino',
+    artist: 'Juanito Torres',
+    year: '2002',
+    image: '/artworks/general-malvar.jpg',
+    blurb: 'A monumental portrait of one of the last Filipino generals to resist American colonial rule, portrayed as a man of the people amid the landscape he fought to defend.',
+  },
+  {
+    slug: 'achilles-patroclus',
+    title: 'Achilles Lamenting the Death of Patroclus',
+    artist: 'Gavin Hamilton',
+    year: '1763',
+    image: '/artworks/achilles-patroclus.jpg',
+    blurb: 'A neoclassical masterwork depicting grief as heroism — Achilles\'s anguish rendered in monumental scale, echoing the universal human cost of war.',
+  },
+  {
+    slug: 'spoliarium',
+    title: 'Spoliarium',
+    artist: 'Juan Luna',
+    year: '1884',
+    image: '/artworks/spoliarium.jpg',
+    blurb: 'Luna\'s towering indictment of colonial brutality, awarded the gold medal at the 1884 Madrid Exposition — a watershed moment for Filipino art on the world stage.',
+  },
+  {
+    slug: 'diwata',
+    title: 'Diwata',
+    artist: 'Guillermo Tolentino',
+    year: '1931',
+    image: '/artworks/diwata.jpg',
+    blurb: 'Carved in the tradition of classical European sculpture, Diwata embodies the Filipino spirit goddess — a synthesis of Western form and indigenous soul.',
+  },
+  {
+    slug: 'retablo',
+    title: 'Retablo',
+    artist: 'Unknown',
+    year: 'c. 18th Century',
+    image: '/artworks/retablo.jpg',
+    blurb: 'A devotional altarpiece that speaks to the complex role of the Catholic Church in shaping Filipino cultural identity through centuries of colonial rule.',
+  },
+  {
+    slug: 'rizal-bust',
+    title: 'José Rizal Bust',
+    artist: 'Guillermo Tolentino',
+    year: '1911',
+    image: '/artworks/rizal-bust.jpg',
+    blurb: 'Tolentino\'s iconic portrait of the national hero, capturing the intellectual intensity and quiet resolve of the man who became the conscience of a nation.',
+  },
+];
+---
+
+<Layout title="Artworks | Culture & Identity">
+  <main class="artworks-page">
+
+    <header class="page-header">
+      <p class="page-eyebrow reveal">The Collection</p>
+      <h1 class="page-title reveal reveal-delay-1">Works of Art</h1>
+      <div class="header-rule reveal reveal-delay-2"></div>
+      <p class="page-sub reveal reveal-delay-3">
+        Seven works spanning centuries, mediums, and nations —<br class="br-desk"/>
+        each a window into the evolving story of Filipino identity.
+      </p>
+    </header>
+
+    <div class="artworks-rule"></div>
+
+    <section class="artworks-list">
+      {artworks.map((work, i) => (
+        <a href={`/artworks/${work.slug}`} class="artwork-row reveal">
+          <div class="artwork-num">
+            <span>{String(i + 1).padStart(2, '0')}</span>
+          </div>
+          <div class="artwork-thumb">
+            <img src={work.image} alt={work.title} class="artwork-thumb-img" />
+          </div>
+          <div class="artwork-info">
+            <p class="artwork-meta">{work.artist} · {work.year}</p>
+            <h2 class="artwork-title">{work.title}</h2>
+            <p class="artwork-blurb">{work.blurb}</p>
+          </div>
+          <div class="artwork-arrow">→</div>
+        </a>
+      ))}
+    </section>
+
+  </main>
+</Layout>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.08 }
+  );
+  revealEls.forEach((el) => observer.observe(el));
+</script>
+
+<style>
+  .artworks-page { padding-top: 72px; }
+
+  /* ── HEADER ── */
+  .page-header {
+    max-width: 700px; margin: 0 auto;
+    padding: 5rem 2rem 4rem;
+    text-align: center;
+  }
+  .page-eyebrow {
+    font-family: 'Inter', sans-serif; font-size: 0.65rem;
+    letter-spacing: 0.4em; text-transform: uppercase;
+    color: #1c1917; opacity: 0.6; font-weight: 500;
+    margin-bottom: 1.25rem; display: block;
+  }
+  .page-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 700; line-height: 1; margin-bottom: 1.5rem;
+    color: #1c1917;
+  }
+  .header-rule {
+    width: 36px; height: 2px; background: #8b1a1a;
+    margin: 0 auto 1.75rem;
+  }
+  .page-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; line-height: 1.85;
+    color: #1c1917; opacity: 0.65; font-weight: 300;
+  }
+  .br-desk { display: inline; }
+
+  .artworks-rule {
+    max-width: 1100px; margin: 0 auto;
+    border-top: 1px solid rgba(28,25,23,0.1);
+    padding: 0 2rem;
+  }
+
+  /* ── ARTWORK ROWS ── */
+  .artworks-list {
+    max-width: 1100px; margin: 0 auto;
+    padding: 0 2rem 6rem;
+  }
+
+  .artwork-row {
+    display: grid;
+    grid-template-columns: 48px 160px 1fr 32px;
+    gap: 0 2rem;
+    align-items: center;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid rgba(28,25,23,0.07);
+    text-decoration: none; color: inherit;
+    position: relative;
+    transition: background 0.2s ease;
+  }
+  .artwork-row::before {
+    content: '';
+    position: absolute; left: -2rem; right: -2rem; top: 0; bottom: 0;
+    background: transparent; transition: background 0.25s ease;
+    pointer-events: none;
+  }
+  .artwork-row:hover::before { background: rgba(28,25,23,0.025); }
+
+  /* number */
+  .artwork-num {
+    text-align: right;
+  }
+  .artwork-num span {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-weight: 300; font-style: italic;
+    color: #1c1917; opacity: 0.2;
+    transition: opacity 0.3s;
+  }
+  .artwork-row:hover .artwork-num span { opacity: 0.5; }
+
+  /* thumbnail */
+  .artwork-thumb {
+    width: 160px; height: 110px; overflow: hidden;
+    flex-shrink: 0; background: #1c1917;
+  }
+  .artwork-thumb-img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.6s ease, filter 0.4s ease;
+    filter: grayscale(15%);
+  }
+  .artwork-row:hover .artwork-thumb-img {
+    transform: scale(1.05); filter: grayscale(0%);
+  }
+
+  /* info */
+  .artwork-info { min-width: 0; }
+  .artwork-meta {
+    font-family: 'Inter', sans-serif; font-size: 0.6rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: #1c1917; opacity: 0.45; margin-bottom: 0.5rem;
+  }
+  .artwork-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    font-weight: 500; line-height: 1.2;
+    color: #1c1917; margin-bottom: 0.6rem;
+    transition: color 0.2s;
+  }
+  .artwork-row:hover .artwork-title { color: #8b1a1a; }
+  .artwork-blurb {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem; line-height: 1.7;
+    color: #1c1917; opacity: 0.6; font-weight: 300;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* arrow */
+  .artwork-arrow {
+    font-size: 1.1rem; color: #1c1917; opacity: 0.2;
+    transition: opacity 0.3s, transform 0.3s;
+    text-align: center;
+  }
+  .artwork-row:hover .artwork-arrow { opacity: 0.6; transform: translateX(4px); }
+
+  /* ── MOBILE ── */
+  @media (max-width: 640px) {
+    .artworks-page { padding-top: 56px; }
+    .page-header { padding: 3.5rem 1.5rem 3rem; }
+    .br-desk { display: none; }
+
+    .artworks-list { padding: 0 1.5rem 4rem; }
+    .artworks-rule { padding: 0 1.5rem; }
+
+    /* Stack: num + thumb on top, then full-width info */
+    .artwork-row {
+      grid-template-columns: 36px 1fr 24px;
+      grid-template-rows: auto auto;
+      gap: 0.75rem 1rem;
+      padding: 2rem 0;
+    }
+    .artwork-num {
+      grid-column: 1; grid-row: 1;
+      align-self: start; padding-top: 0.2rem;
+    }
+    .artwork-thumb {
+      grid-column: 2; grid-row: 1;
+      width: 100%; height: 180px;
+    }
+    .artwork-info {
+      grid-column: 1 / 3; grid-row: 2;
+    }
+    .artwork-arrow {
+      grid-column: 3; grid-row: 1;
+      align-self: start; padding-top: 0.2rem;
+    }
+    .artwork-blurb { -webkit-line-clamp: 3; }
+    .artwork-title { font-size: 1.1rem; }
+  }
+</style>

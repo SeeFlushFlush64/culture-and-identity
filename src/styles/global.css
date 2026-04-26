@@ -1,0 +1,251 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap');
+@import "tailwindcss/preflight";
+@import "tailwindcss/utilities";
+
+/* ── CSS Variables ── */
+:root {
+  --bg:        #f2ead8;
+  --bg-alt:    #ede4cf;
+  --ink:       #1c1917;
+  --ink-muted: rgba(28,25,23,0.72);
+  --ink-faint: rgba(28,25,23,0.45);
+  --accent:    #8b1a1a;
+  --warm:      #c4853a;
+  --cream:     #faf6ee;
+  --dark:      #1c1917;
+
+  --font-display: 'Playfair Display', serif;
+  --font-body:    'Inter', sans-serif;
+  --font-accent:  'Cormorant Garamond', serif;
+}
+
+/* ── Reset ── */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+body {
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 300;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+}
+
+h1, h2, h3 { font-family: var(--font-display); }
+
+/* ── Global eyebrow / label utility ── */
+/* Use these classes anywhere for consistent small caps labels */
+.eyebrow, .label-sm {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--ink);
+  opacity: 0.6;           /* was 0.38–0.4 — now clearly readable */
+}
+
+/* ── Scroll Reveal ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ── Ken Burns ── */
+@keyframes kenBurns {
+  0%   { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+.ken-burns {
+  animation: kenBurns 12s ease-out forwards;
+}
+
+/* ── Artwork card hover ── */
+.artwork-card:hover .artwork-img {
+  transform: scale(1.05);
+  filter: sepia(25%) brightness(0.92);
+}
+
+/* ── Nav active ── */
+nav a.active {
+  opacity: 1 !important;
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 2px;
+}
+nav a:hover { opacity: 1 !important; }
+
+/* ── Sepia tint overlay on artwork cards ── */
+.artwork-card::after {
+  content:'';
+  position:absolute;
+  inset:0;
+  background: rgba(139,90,43,0);
+  transition: background 0.4s ease;
+  pointer-events:none;
+}
+.artwork-card:hover::after {
+  background: rgba(139,90,43,0.08);
+}
+
+/* ════════════════════════════════════════
+   MOBILE GLOBAL OVERRIDES
+   ════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  /* Nav */
+  nav {
+    padding: 0 1.25rem !important;
+  }
+
+  /* Make eyebrows/labels slightly bigger on mobile so they're legible */
+  .eyebrow, .label-sm,
+  [class*="eyebrow"], [class*="eyebrow"],
+  p[class*="eyebrow"] {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+  }
+
+  /* Tighten page padding globally on mobile */
+  section, article, header {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+
+  /* Pull quotes */
+  blockquote {
+    padding-left: 1.25rem !important;
+    font-size: 1.1rem !important;
+  }
+
+  /* Context/dark blocks */
+  [class*="context-block"],
+  [class*="thesis-block"] {
+    padding: 3rem 1.5rem !important;
+  }
+
+  /* Bio grid → single col */
+  [class*="bio-section"] {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+    padding: 0 1.5rem 3rem !important;
+  }
+  [class*="bio-label-col"] { display: none !important; }
+
+  /* Artist hero → stack */
+  [class*="artist-hero"] {
+    grid-template-columns: 1fr !important;
+    min-height: unset !important;
+  }
+  [class*="hero-image-col"] { min-height: 55vw !important; }
+  [class*="hero-text-col"] {
+    padding: 2.5rem 1.5rem !important;
+  }
+  [class*="hero-name"] {
+    font-size: clamp(2rem, 9vw, 3rem) !important;
+  }
+
+  /* Works grid → single col */
+  [class*="works-grid"] {
+    grid-template-columns: 1fr !important;
+  }
+  [class*="work-card-single"] {
+    aspect-ratio: 4/3 !important;
+  }
+
+  /* Artist nav → single col */
+  [class*="artist-nav"] {
+    grid-template-columns: 1fr !important;
+  }
+  [class*="nav-next"] {
+    border-left: none !important;
+    border-top: 1px solid rgba(28,25,23,0.1) !important;
+    justify-content: flex-start !important;
+  }
+  [class*="artist-nav-item"] { padding: 1.5rem !important; }
+
+  /* Members grid → single col */
+  [class*="members-grid"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Timeline → left-flush */
+  [class*="timeline-section"] {
+    padding: 1rem 1.5rem 4rem !important;
+  }
+  [class*="timeline-spine"] {
+    left: 0.5rem !important;
+    transform: none !important;
+  }
+  [class*="timeline-item"] {
+    grid-template-columns: 32px 1fr !important;
+    margin-bottom: 2.5rem !important;
+  }
+  [class*="artist-row"] {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  [class*="artist-photo-wrap"] {
+    width: 100% !important;
+    height: 200px !important;
+  }
+
+  /* About team grid */
+  [class*="team-section"] {
+    padding: 3rem 1.5rem !important;
+  }
+
+  /* Works section padding */
+  [class*="works-section"] {
+    padding: 3rem 1.5rem !important;
+  }
+
+  /* Pull quote margin */
+  [class*="pull-quote-wrap"] {
+    margin: 3rem auto !important;
+    padding: 0 1.5rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Extra small — phones */
+  [class*="hero-name"],
+  h1 {
+    font-size: clamp(1.8rem, 10vw, 2.5rem) !important;
+  }
+  [class*="page-title"] {
+    font-size: clamp(2.5rem, 12vw, 4rem) !important;
+  }
+  [class*="artist-row"] {
+    padding: 1.5rem 0 !important;
+  }
+}
+
+/* ── NAV: fix logo wrap on mobile ── */
+@media (max-width: 768px) {
+  nav {
+    padding: 0.75rem 1rem !important;
+    gap: 0.5rem !important;
+  }
+  .nav-logo {
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    font-size: 0.72rem !important;
+  }
+  .nav-links {
+    gap: 0.6rem !important;
+    flex-shrink: 0 !important;
+  }
+  .nav-links a {
+    font-size: 0.5rem !important;
+    letter-spacing: 0.06em !important;
+  }
+}

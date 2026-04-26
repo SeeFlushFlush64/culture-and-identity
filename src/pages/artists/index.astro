@@ -1,0 +1,293 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const artists = [
+  {
+    name: 'Gavin Hamilton',
+    born: 1723, died: 1798,
+    nationality: 'Scottish',
+    role: 'Painter',
+    image: '/artists/gavin-hamilton.jpg',
+    bio: 'A pioneer of Neoclassicism, Hamilton trained and worked primarily in Rome, where he was central to the intellectual circle that shaped 18th-century European art. His monumental history paintings — drawn from Homer and ancient history — influenced Jacques-Louis David and the entire Neoclassical movement.',
+    works: [{ title: 'Achilles Lamenting the Death of Patroclus', slug: 'achilles-patroclus' }],
+    slug: 'gavin-hamilton',
+  },
+  {
+    name: 'Juan Luna',
+    born: 1857, died: 1899,
+    nationality: 'Filipino',
+    role: 'Painter',
+    image: '/artists/juan-luna.jpg',
+    bio: 'Born in Badoc, Ilocos Norte, Juan Luna trained in Manila, Madrid, and Rome before achieving international renown with the Spoliarium. He was closely associated with José Rizal and the Propaganda Movement, using art as a vehicle for nationalist sentiment under Spanish colonial rule.',
+    works: [{ title: 'Spoliarium', slug: 'spoliarium' }],
+    slug: 'juan-luna',
+  },
+  {
+    name: 'Guillermo Tolentino',
+    born: 1890, died: 1976,
+    nationality: 'Filipino',
+    role: 'Sculptor',
+    image: '/artists/guillermo-tolentino.jpeg',
+    bio: 'Regarded as the greatest Filipino sculptor of the 20th century, Tolentino studied at the Royal Academy of Fine Arts in Rome and returned to the Philippines to create works that synthesized European classical tradition with indigenous Philippine subject matter. He was declared a National Artist in 1973.',
+    works: [
+      { title: 'Diwata', slug: 'diwata' },
+      { title: 'José Rizal Bust', slug: 'rizal-bust' },
+    ],
+    slug: 'guillermo-tolentino',
+  },
+  {
+    name: 'Juanito Torres',
+    born: 1954, died: null,
+    nationality: 'Filipino',
+    role: 'Painter',
+    image: '/artists/juanito-torres.jpg',
+    bio: 'A founding member of KAMPILAN (Kaisahan ng Manggagawang Pilipino sa Sining), Torres has spent five decades painting the stories of Filipino laborers, revolutionaries, and heroes. His work is rooted in social realism and a deep commitment to the recovery of suppressed historical narratives.',
+    works: [{ title: 'General Malvar: Lider ng Masang Pilipino', slug: 'general-malvar' }],
+    slug: 'juanito-torres',
+  },
+  {
+    name: 'Elmer Borlongan',
+    born: 1967, died: null,
+    nationality: 'Filipino',
+    role: 'Painter',
+    image: '/artists/elmer-borlongan.jpg',
+    bio: 'One of the most significant Filipino painters of his generation, Borlongan is known for his expressionist depictions of urban life, social struggle, and Philippine history. His work blends a Western expressionist vocabulary with distinctly local narratives, often centering the marginalized and the forgotten.',
+    works: [{ title: 'Battle of Mactan', slug: 'battle-of-mactan' }],
+    slug: 'elmer-borlongan',
+  },
+];
+
+const sorted = [...artists].sort((a, b) => a.born - b.born);
+---
+
+<Layout title="Artists | Culture & Identity">
+  <main class="artists-page">
+
+    <!-- ── HERO HEADER ── -->
+    <header class="page-header">
+      <p class="page-eyebrow reveal">The Creators</p>
+      <h1 class="page-title reveal reveal-delay-1">Artists</h1>
+      <div class="header-rule reveal reveal-delay-2"></div>
+      <p class="page-sub reveal reveal-delay-3">
+        Five artists across three centuries and two continents —<br/>
+        united by a commitment to art that illuminates the human condition.
+      </p>
+    </header>
+
+    <!-- ── ARTIST LIST ── -->
+    <section class="artists-list">
+      {sorted.map((artist, i) => (
+        <a href={`/artists/${artist.slug}`} class="artist-row reveal">
+
+          <!-- Index number -->
+          <div class="artist-index">
+            <span>{String(i + 1).padStart(2, '0')}</span>
+          </div>
+
+          <!-- Photo -->
+          <div class="artist-photo-wrap">
+            <img src={artist.image} alt={artist.name} class="artist-photo" />
+          </div>
+
+          <!-- Info -->
+          <div class="artist-info">
+            <p class="artist-meta">
+              {artist.nationality} · {artist.role} · {artist.born}{artist.died ? `–${artist.died}` : ''}
+            </p>
+            <h2 class="artist-name">{artist.name}</h2>
+            <p class="artist-bio">{artist.bio}</p>
+            <div class="artist-works">
+              {artist.works.map(w => (
+                <span class="work-tag">{w.title}</span>
+              ))}
+            </div>
+          </div>
+
+          <!-- CTA arrow -->
+          <div class="artist-arrow">
+            <span>→</span>
+          </div>
+
+        </a>
+      ))}
+    </section>
+
+  </main>
+</Layout>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.08 }
+  );
+  revealEls.forEach((el) => observer.observe(el));
+</script>
+
+<style>
+  /* reveal from global.css */
+  .artists-page { padding-top: 80px; }
+
+  /* ── HEADER ── */
+  .page-header {
+    max-width: 760px; margin: 0 auto;
+    padding: 6rem 4rem 5rem;
+    text-align: center;
+  }
+  .page-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.62rem; letter-spacing: 0.45em;
+    text-transform: uppercase; opacity: 0.4;
+    margin-bottom: 1.25rem; display: block;
+  }
+  .page-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 700; line-height: 1; margin-bottom: 1.5rem;
+  }
+  .header-rule {
+    width: 36px; height: 2px; background: #8b1a1a;
+    margin: 0 auto 1.75rem;
+  }
+  .page-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; line-height: 1.85;
+    opacity: 0.6; font-weight: 300;
+  }
+
+  /* ── ARTIST LIST ── */
+  .artists-list {
+    max-width: 1100px; margin: 0 auto;
+    padding: 0 4rem 8rem;
+    border-top: 1px solid rgba(28,25,23,0.1);
+  }
+
+  .artist-row {
+    display: grid;
+    grid-template-columns: 56px 220px 1fr 48px;
+    gap: 0 3rem;
+    align-items: center;
+    padding: 3rem 0;
+    border-bottom: 1px solid rgba(28,25,23,0.08);
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.3s ease;
+    position: relative;
+  }
+  .artist-row::before {
+    content: '';
+    position: absolute;
+    left: -4rem; right: -4rem; top: 0; bottom: 0;
+    background: rgba(28,25,23,0);
+    transition: background 0.3s ease;
+    pointer-events: none;
+  }
+  .artist-row:hover::before {
+    background: rgba(28,25,23,0.03);
+  }
+
+  /* index number */
+  .artist-index {
+    text-align: right;
+    padding-right: 0.5rem;
+  }
+  .artist-index span {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 300; font-style: italic;
+    opacity: 0.2;
+    transition: opacity 0.3s ease;
+  }
+  .artist-row:hover .artist-index span { opacity: 0.5; }
+
+  /* photo */
+  .artist-photo-wrap {
+    width: 220px; height: 160px;
+    overflow: hidden; flex-shrink: 0;
+    background: #1c1917;
+  }
+  .artist-photo {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center top;
+    transition: transform 0.6s ease, filter 0.4s ease;
+    filter: grayscale(20%);
+  }
+  .artist-row:hover .artist-photo {
+    transform: scale(1.05);
+    filter: grayscale(0%);
+  }
+
+  /* info */
+  .artist-info { min-width: 0; }
+  .artist-meta {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.6rem; letter-spacing: 0.2em;
+    text-transform: uppercase; opacity: 0.4;
+    margin-bottom: 0.6rem;
+  }
+  .artist-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+    font-weight: 500; line-height: 1.1;
+    margin-bottom: 0.85rem;
+    transition: color 0.2s ease;
+  }
+  .artist-row:hover .artist-name { color: #8b1a1a; }
+
+  .artist-bio {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem; line-height: 1.75;
+    opacity: 0.65; font-weight: 300;
+    margin-bottom: 1.1rem;
+    /* clamp to 3 lines */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .artist-works { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .work-tag {
+    font-family: 'Inter', sans-serif; font-size: 0.62rem;
+    border: 1px solid rgba(139,26,26,0.3); color: #8b1a1a;
+    padding: 0.2rem 0.65rem; letter-spacing: 0.03em;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .artist-row:hover .work-tag {
+    background: #8b1a1a; color: #f2ead8;
+  }
+
+  /* arrow */
+  .artist-arrow {
+    display: flex; align-items: center; justify-content: center;
+  }
+  .artist-arrow span {
+    font-size: 1.25rem; opacity: 0.2;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    display: block;
+  }
+  .artist-row:hover .artist-arrow span {
+    opacity: 0.7;
+    transform: translateX(4px);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 800px) {
+    .artists-list { padding: 0 2rem 6rem; }
+    .page-header { padding: 5rem 2rem 4rem; }
+    .artist-row {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      padding: 2rem 0;
+    }
+    .artist-index { text-align: left; }
+    .artist-photo-wrap { width: 100%; height: 220px; }
+    .artist-arrow { justify-content: flex-start; }
+    .artist-row::before { left: -2rem; right: -2rem; }
+  }
+</style>

@@ -1,0 +1,261 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const members = [
+  { name: 'Alwalid M. Ekkawi',        initials: 'AM' },
+  { name: 'Raven Zachary T. Arenas',  initials: 'RZ' },
+  { name: 'Bernardo C. De Guzman',    initials: 'BC' },
+  { name: 'Jheremie A. Macatiag',     initials: 'JA' },
+  { name: 'Walter Caido',             initials: 'WC' },
+  { name: 'Dizon Manuel',             initials: 'DM' },
+  { name: 'Prince Navarro',           initials: 'PN' },
+  { name: 'Rowel Ramos',              initials: 'RR' },
+  { name: 'Adrian Justine Ola',       initials: 'AJ' },
+];
+---
+
+<Layout title="About | Culture & Identity">
+  <main class="about-page">
+
+    <!-- HERO -->
+    <section class="about-hero">
+      <p class="eyebrow reveal">About the Exhibition</p>
+      <h1 class="about-title reveal reveal-delay-1">Culture &amp;<br/>Identity</h1>
+      <div class="about-rule reveal reveal-delay-2"></div>
+      <p class="about-subtitle reveal reveal-delay-3">A Virtual Museum Tour</p>
+    </section>
+
+    <!-- THESIS -->
+    <section class="thesis-block">
+      <div class="thesis-inner">
+        <p class="section-label reveal">Our Thesis</p>
+        <blockquote class="thesis-quote reveal reveal-delay-1">
+          Art does not merely reflect culture — it constitutes it. The works gathered here are not passive records of Filipino history; they are active agents in the ongoing construction of national identity.
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- BODY -->
+    <section class="about-body">
+      <div class="about-text reveal">
+        <p>
+          This virtual museum was created as a school project exploring how art functions as both a mirror and a maker of cultural identity. We chose seven works spanning five centuries and multiple nations — not because they form a neat narrative, but because the tensions and conversations between them illuminate something true about the complexity of Filipino nationhood.
+        </p>
+        <p>
+          Some of these works were made by Filipinos about Filipino experience. Others were made by non-Filipinos and absorbed into the Philippine cultural imagination through education, colonial history, or resonance. We believe both types of encounter matter.
+        </p>
+        <p>
+          The question we kept returning to: <em>what does it mean for a people to claim an image as their own?</em> The Spoliarium was painted for a Spanish audience. Achilles was written by a Greek. Yet both live in the Filipino classroom, the Filipino imagination, the Filipino sense of what it means to suffer, resist, and endure. Identity, it turns out, is not exclusive — it is accumulative.
+        </p>
+      </div>
+    </section>
+
+    <div class="mid-rule"></div>
+
+    <!-- TEAM -->
+    <section class="team-section">
+      <div class="team-header reveal">
+        <p class="team-eyebrow">The Team</p>
+        <h2 class="team-title">Group 4</h2>
+        <p class="team-subtitle">Nine members. One exhibition.</p>
+      </div>
+
+      <div class="members-grid">
+        {members.map((m, i) => (
+          <div class={`member-card reveal reveal-delay-${(i % 3) + 1}`}>
+            <div class="member-avatar-wrap">
+              <div class="member-avatar">{m.initials}</div>
+              <div class="avatar-ring"></div>
+            </div>
+            <div class="member-body">
+              <h3 class="member-name">{m.name}</h3>
+              <p class="member-role">Group Member</p>
+            </div>
+            <div class="member-accent"></div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- CLOSING -->
+    <section class="closing-block">
+      <p class="closing-text reveal">
+        Built with Astro &amp; vanilla CSS · Images sourced from public domain and educational repositories · All written content is original
+      </p>
+    </section>
+
+  </main>
+</Layout>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
+  revealEls.forEach((el) => observer.observe(el));
+</script>
+
+<style>
+  /* ── reveal styles come from global.css — do NOT redefine here ── */
+
+  .about-page { padding-top: 80px; }
+
+  .about-hero {
+    max-width: 900px; margin: 0 auto;
+    padding: 7rem 4rem 5rem;
+    text-align: center;
+  }
+  .eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.62rem; letter-spacing: 0.45em;
+    text-transform: uppercase; opacity: 0.4;
+    margin-bottom: 1.5rem; display: block;
+  }
+  .about-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 7vw, 7rem);
+    font-weight: 700; line-height: 0.95;
+    margin-bottom: 2rem;
+  }
+  .about-rule {
+    width: 36px; height: 2px; background: #8b1a1a;
+    margin: 0 auto 1.5rem;
+  }
+  .about-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; font-style: italic; opacity: 0.45;
+  }
+
+  .thesis-block { background: #1c1917; padding: 6rem 4rem; }
+  .thesis-inner { max-width: 760px; margin: 0 auto; text-align: center; }
+  .section-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.62rem; letter-spacing: 0.4em;
+    text-transform: uppercase; color: #f2ead8; opacity: 0.4;
+    margin-bottom: 1.5rem; display: block;
+  }
+  .thesis-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+    font-style: italic; font-weight: 400;
+    color: #f2ead8; line-height: 1.65;
+    border: none; padding: 0; margin: 0;
+  }
+
+  .about-body { max-width: 720px; margin: 0 auto; padding: 6rem 4rem; }
+  .about-text p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem; line-height: 1.95;
+    opacity: 0.75; font-weight: 300; margin-bottom: 1.75rem;
+  }
+  .about-text em { font-style: italic; opacity: 1; }
+
+  .mid-rule {
+    max-width: 960px; margin: 0 auto; padding: 0 4rem;
+    border-top: 1px solid rgba(28,25,23,0.1);
+  }
+
+  .team-section { max-width: 1020px; margin: 0 auto; padding: 6rem 4rem 5rem; }
+  .team-header { text-align: center; margin-bottom: 4rem; }
+  .team-eyebrow {
+    font-family: 'Inter', sans-serif; font-size: 0.62rem;
+    letter-spacing: 0.4em; text-transform: uppercase;
+    opacity: 0.35; margin-bottom: 0.75rem; display: block;
+  }
+  .team-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700; line-height: 1; margin-bottom: 0.75rem;
+  }
+  .team-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem; font-style: italic; opacity: 0.4; margin: 0;
+  }
+
+  .members-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(28,25,23,0.08);
+    border: 1px solid rgba(28,25,23,0.08);
+  }
+
+  .member-card {
+    position: relative;
+    display: flex; align-items: center; gap: 1.25rem;
+    padding: 1.75rem 2rem;
+    background: #f2ead8; overflow: hidden;
+    transition: background 0.3s ease;
+  }
+  .member-card:hover { background: #ece3ce; }
+
+  .member-accent {
+    position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
+    background: #8b1a1a;
+    transform: scaleY(0); transform-origin: bottom;
+    transition: transform 0.35s ease;
+  }
+  .member-card:hover .member-accent { transform: scaleY(1); }
+
+  .member-avatar-wrap { position: relative; flex-shrink: 0; width: 48px; height: 48px; }
+  .member-avatar {
+    width: 48px; height: 48px;
+    background: #1c1917; color: #f2ead8;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem; font-weight: 500; letter-spacing: 0.05em;
+    position: relative; z-index: 1;
+    transition: background 0.3s ease;
+  }
+  .member-card:hover .member-avatar { background: #8b1a1a; }
+
+  .avatar-ring {
+    position: absolute; inset: -3px; border-radius: 50%;
+    border: 1px solid rgba(28,25,23,0.15);
+    transition: border-color 0.3s ease;
+  }
+  .member-card:hover .avatar-ring { border-color: rgba(139,26,26,0.35); }
+
+  .member-body { display: flex; flex-direction: column; gap: 0.2rem; }
+  .member-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem; font-weight: 500;
+    line-height: 1.3; color: #1c1917; margin: 0;
+  }
+  .member-role {
+    font-family: 'Inter', sans-serif; font-size: 0.58rem;
+    letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.35; margin: 0;
+  }
+
+  .closing-block {
+    text-align: center; padding: 3rem 4rem 5rem;
+    border-top: 1px solid rgba(28,25,23,0.07); margin-top: 2rem;
+  }
+  .closing-text {
+    font-family: 'Inter', sans-serif; font-size: 0.72rem;
+    opacity: 0.3; letter-spacing: 0.05em; line-height: 1.9;
+  }
+
+  @media (max-width: 720px) {
+    .about-hero { padding: 5rem 2rem 3rem; }
+    .thesis-block { padding: 4rem 2rem; }
+    .about-body { padding: 4rem 2rem; }
+    .team-section { padding: 4rem 2rem 3rem; }
+    .members-grid { grid-template-columns: 1fr; }
+    .mid-rule { padding: 0 2rem; }
+    .closing-block { padding: 2.5rem 2rem 4rem; }
+  }
+
+  @media (min-width: 721px) and (max-width: 960px) {
+    .members-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
